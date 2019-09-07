@@ -1,7 +1,14 @@
 import React from 'react'
 import  './ProductItem.css'
 
-function ProductItem({item}) {
+function ProductItem(props) {
+
+    const {item, onAddToCard} = props
+
+    const addToCard = () => {
+      onAddToCard(item)
+    }
+
     return (
         <div className="col-xl-4 col-lg-6 col-md-6">
         <div className="product-wrapper mb-50">
@@ -11,7 +18,7 @@ function ProductItem({item}) {
               <img className="secondary-img" src="./assets/pro4.jpg" alt="" />
             </a>
             <div className="product-action text-center">
-              <a href="#" title="Shoppingb Cart">
+              <a href="#" title="Shoppingb Cart" onClick={addToCard}>
                 <i className="fas fa-shopping-cart" />
               </a>
               <a href="#" title="Quick View">

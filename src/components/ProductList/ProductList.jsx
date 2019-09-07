@@ -3,6 +3,8 @@ import './ProductList.css'
 import '../ProductItem/ProductItem'
 import ProductItem from '../ProductItem/ProductItem';
 function ProductList(props) {
+
+  const {productList, onAddToCard} = props
     return (
         <main>
           {/* shop-area start */}
@@ -22,8 +24,8 @@ function ProductList(props) {
                   <div className="tab-content" id="myTabContent">
                     <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                       <div className="row">
-                         {props.productList.map(element  => {
-                            return <ProductItem item={element}/>
+                         {productList.map(element  => {
+                            return <ProductItem item={element} onAddToCard={onAddToCard}/>
                          })}
                       </div>
                     </div>
