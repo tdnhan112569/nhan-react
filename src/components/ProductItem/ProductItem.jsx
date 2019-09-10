@@ -53,8 +53,8 @@ function ProductItem(props) {
             </h4>
             <div className="product-meta">
               <div className="pro-price">
-                <span>{onPriceDisplay(item.price)}</span>
-                <span className="old-price">{onPriceDisplay(item.finalPrice)}</span>
+                <span>{onPriceDisplay(item.price)}$</span>
+                <span className="old-price">{onPriceDisplay(item.finalPrice)}$</span>
               </div>
             </div>
           </div>
