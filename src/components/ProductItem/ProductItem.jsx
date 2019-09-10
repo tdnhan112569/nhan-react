@@ -9,6 +9,24 @@ function ProductItem(props) {
       onAddToCard(item)
     }
 
+    const onPriceDisplay = (text) => {
+      if ((text + '').length <= 3) return text + ''
+      let i = 0
+      let price = (text + '').split('')
+      var priceToText = "";
+      let count = 0
+      for (i = price.length - 1; i >= 0; i--) {
+          if (count === 3) {
+              priceToText = price[i] + ',' + priceToText;
+              count = 0;
+          } else {
+              priceToText = price[i] + priceToText
+          }
+          count++
+      }
+      return priceToText
+    }
+
     return (
         <div className="col-xl-4 col-lg-6 col-md-6">
         <div className="product-wrapper mb-50">
@@ -35,8 +53,8 @@ function ProductItem(props) {
             </h4>
             <div className="product-meta">
               <div className="pro-price">
-                <span>{item.price}</span>
-                <span className="old-price">{item.finalPrice}</span>
+                <span>{onPriceDisplay(item.price)}</span>
+                <span className="old-price">{onPriceDisplay(item.finalPrice)}</span>
               </div>
             </div>
           </div>
