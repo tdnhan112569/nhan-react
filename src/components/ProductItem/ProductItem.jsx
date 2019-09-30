@@ -1,9 +1,10 @@
 import React from 'react'
 import  './ProductItem.css'
+import {Link, Redirect} from 'react-router-dom'
 
 function ProductItem(props) {
 
-    const {item, onAddToCard} = props
+    const {item, onAddToCard, _userInfo} = props
 
     const addToCard = () => {
       onAddToCard(item)
@@ -27,21 +28,25 @@ function ProductItem(props) {
       return priceToText
     }
 
+    const param = `/detail/${item.product_id}`
+    //console.log(param)
+    console.log(_userInfo)
+
     return (
         <div className="col-xl-4 col-lg-6 col-md-6">
         <div className="product-wrapper mb-50">
           <div className="product-img mb-25">
             <a href="#">
-              <img src="./assets/pro3.jpg" alt="" />
-              <img className="secondary-img" src="./assets/pro4.jpg" alt="" />
+              <img src={item.img_url} alt="" />
+              <img className="secondary-img" src={item.url_icon_event} alt="" />
             </a>
             <div className="product-action text-center">
               <a href="#" title="Shoppingb Cart" onClick={addToCard}>
                 <i className="fas fa-shopping-cart" />
               </a>
-              <a href="#" title="Quick View">
-                <i className="fas fa-search" />
-              </a>
+              <Link to={param}>
+                    <i className="fas fa-search" />
+              </Link>
             </div>
           </div>
           <div className="product-content pr-0">
@@ -53,8 +58,8 @@ function ProductItem(props) {
             </h4>
             <div className="product-meta">
               <div className="pro-price">
-                <span>{onPriceDisplay(item.price)}$</span>
-                <span className="old-price">{onPriceDisplay(item.finalPrice)}$</span>
+                <span>{onPriceDisplay(item.final_price)}$</span>
+                <span className="old-price">{onPriceDisplay(item.price)}$</span>
               </div>
             </div>
           </div>

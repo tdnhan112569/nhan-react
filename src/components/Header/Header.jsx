@@ -1,7 +1,28 @@
-import React from "react";
+import React, {useEffect} from "react";
+import {Link} from 'react-router-dom'
+import firebaseApp from '../../firebase';
 
 function Header(props) {
-  const {arrayProductOrderCard = [], onRemoveItemFromCard} = props
+  const {arrayProductOrderCard = [], onRemoveItemFromCard, onInitUserState, history, location, user} = props
+  console.log(props,"header props")
+  useEffect(()=> {
+    firebaseApp.auth().onAuthStateChanged((_user)=> {
+      if(_user) {
+        //initUserInfo(user)
+        onInitUserState(_user)
+      }
+    })
+  },[onInitUserState])
+
+  useEffect(()=> {
+    if(location.pathname === '/login' && user != null) {
+      console.log(props, "sau khi vao if")
+      const {from} = history.location.state
+      const {pathname} = from
+      history.push('/')
+    }
+  },[user])
+
   return (
     <header>
       <div id="header-sticky" className="header-area box-90 sticky-header">
@@ -59,22 +80,30 @@ function Header(props) {
                 <nav id="mobile-menu" style={{ display: "block" }}>
                   <ul>
                     <li>
-                      <a href="./index.html">Home</a>
+                      <a href="./">Home</a>
                     </li>
                     <li>
                       <a href="#">Pages</a>
                       <ul className="submenu">
                         <li>
-                          <a href="./detail.html">Product Detail</a>
+                          <Link to='/'>
+                            <a>Product List</a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="./login.html">login</a>
+                          <Link to='/login'>
+                            <a>login</a>
+                          </Link>
                         </li>
                         <li>
-                          <a href="./register.html">Register</a>
+                          <Link to='/register'>
+                            <a>Register</a>
+                          </Link>  
                         </li>
                         <li>
-                          <a href="./cart.html">Shoping Cart</a>
+                            <Link to='/cksancisa'>
+                          <a>Shoping Cart</a>
+                          </Link>
                         </li>
                       </ul>
                     </li>

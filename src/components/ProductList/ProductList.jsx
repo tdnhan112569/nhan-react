@@ -1,13 +1,23 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './ProductList.css'
 import '../ProductItem/ProductItem'
 import ProductItem from '../ProductItem/ProductItem';
 function ProductList(props) {
-  const {productList, onAddToCard} = props
+  const {productList, onAddToCard, getProductList, getProductList2} = props
+  console.log('this is props')
+  console.log(props)
+  console.log('---------------')
+  useEffect(()=>{
+    getProductList()
+    getProductList2()
+  },[])
 
   const NAME_SORTING = 0
   const PRICE_SORTING = 1
-  const [productsShowing, setStateProductsShowing] = useState([...productList])
+  const [productsShowing, setStateProductsShowing] = useState([])
+  useEffect(()=>{
+    setStateProductsShowing([...productList])
+  },[productList])
   const [textChange, setText] = useState("")
 
   const filterProductTopSale = () => {
@@ -43,10 +53,10 @@ function ProductList(props) {
   } 
 
   const sortPriceLowToHigh = (objectA, objectB) => {
-    if(objectA.finalPrice > objectB.finalPrice) {
+    if(objectA.price > objectB.price) {
       return 1
     }
-     else if(objectA.finalPrice < objectB.finalPrice) {
+     else if(objectA.price < objectB.price) {
       return -1
     }
     else {
@@ -55,10 +65,10 @@ function ProductList(props) {
   }
 
   const sortPriceHighToLow = (objectA, objectB) => {
-    if(objectA.finalPrice > objectB.finalPrice) {
+    if(objectA.price > objectB.price) {
       return -1
     }
-    else if(objectA.finalPrice < objectB.finalPrice) {
+    else if(objectA.price < objectB.price) {
       return 1
     }
     else {
@@ -105,6 +115,7 @@ function ProductList(props) {
    setText("")
   }
   
+  console.log(productsShowing)
   return (
 
     <main>
@@ -163,7 +174,7 @@ function ProductList(props) {
                 </div>
                 <div className="shop-widget">
                   <h3 className="shop-title">Recent Product</h3>
-                  <ul className="shop-sidebar-product">
+                  {/* <ul className="shop-sidebar-product">
                     <li>
                       <div className="side-pro-img">
                         <a href="#"><img src="./assets/shop-rsp3.jpg" alt="" /></a>
@@ -218,7 +229,7 @@ function ProductList(props) {
                         </div>
                       </div>
                     </li>
-                  </ul>
+                  </ul> */}
                 </div>
                 <div className="shop-widget">
                   <div className="shop-sidebar-banner">

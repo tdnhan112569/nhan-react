@@ -1,12 +1,17 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+import firebaseApp from '../../firebase'
+import {Redirect} from 'react-router-dom'
 
-export default function Login() {
+export default function Login(props) {
 
     const [formData, setFormData] = useState({ email : '', password : ''})
-
+    const {_onSignInWithFirebase, _errorMess, _loading, _user, history} = props
+    const [isShowedError, setIsShowedError] = useState(true)
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.log(formData)
+        const {email, password} = formData
+        _onSignInWithFirebase(email, password)
+        setIsShowedError(true)
     }
 
     // const onEmailOnChange = (event) => {
@@ -17,12 +22,38 @@ export default function Login() {
     //     setFormData({...formData, password : event.target.value})
     // }
 
+    // useEffect(()=>{
+    //   if(_user) {
+    //      const {location} = history 
+    //      const {state} = location
+    //      const {from} = state
+    //      const {pathname} = from
+    //      console.log(props)
+    //      history.push(pathname)
+    //   }
+    // }, [_user])
+  
+    
+
+    if(!_loading) {
+      if(_errorMess.length !== 0 && isShowedError) {
+        alert(_errorMess)
+        setIsShowedError(false)
+      }
+    }
+   
     const onChange = (event) => {
         const id = event.target.id
         setFormData({...formData, [id] : event.target.value})
     }
 
-   // console.log(formData)
+    // if(_user !== {} && _user !== undefined) {
+    //   return (
+    //     <Redirect to={{
+    //       pathname : '/'
+    //     }}/>
+    //   )
+    // } 
 
     return (
         <main>

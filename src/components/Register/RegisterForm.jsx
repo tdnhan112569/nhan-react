@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import './RegisterForm.css'
+import firebaseApp from '../../firebase'
 
 export default function RegisterForm() {
 
@@ -8,6 +9,8 @@ export default function RegisterForm() {
     const handleSubmit = (event) => {
         event.preventDefault()
         console.log(formData)
+        const {email, password} = formData
+        firebaseApp.auth().createUserWithEmailAndPassword(email, password)
     }
 
     const onChange = (event) => {
