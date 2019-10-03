@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import firebaseApp from '../../firebase'
 import {Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 export default function Login(props) {
 
@@ -65,7 +66,9 @@ export default function Login(props) {
                   <div className="breadcrumb-text text-center">
                     <h1>Login</h1>
                     <ul className="breadcrumb-menu">
-                      <li><a href="index.html">home</a></li>
+                      <li> <Link to='/'>
+                            <a>Home</a>
+                          </Link></li>
                       <li><span>Login</span></li>
                     </ul>
                   </div>

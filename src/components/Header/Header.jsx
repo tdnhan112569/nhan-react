@@ -3,7 +3,8 @@ import {Link} from 'react-router-dom'
 import firebaseApp from '../../firebase';
 
 function Header(props) {
-  const {arrayProductOrderCard = [], onRemoveItemFromCard, onInitUserState, history, location, user} = props
+  const {listItemCart, onRemoveItemFromCard, onInitUserState, history, location, user} = props
+  const arrayProductOrderCard = listItemCart
   console.log(props,"header props")
   useEffect(()=> {
     firebaseApp.auth().onAuthStateChanged((_user)=> {
@@ -101,7 +102,7 @@ function Header(props) {
                           </Link>  
                         </li>
                         <li>
-                            <Link to='/cksancisa'>
+                            <Link to='/cart'>
                           <a>Shoping Cart</a>
                           </Link>
                         </li>

@@ -9,8 +9,9 @@ import {createStore, combineReducers, applyMiddleware} from 'redux'
 import ProductListReducer from './components/ProductList/ProductList.reducer'
 import LoginReducer from './components/Login/Login.reducer'
 import HeaderReducer from './components/Header/Header.reducer'
+import ProductDetailReducer from './components/ProductDetail/ProductDetail.reducer'
 
-const reducer = combineReducers({productRed : ProductListReducer, loginRed : LoginReducer, headerRed: HeaderReducer})
+const reducer = combineReducers({productRed : ProductListReducer, loginRed : LoginReducer, headerRed: HeaderReducer, productDetailReducer: ProductDetailReducer })
 const store = createStore(reducer, applyMiddleware(thunk))
 ReactDOM.render(
     <Provider store={store}>

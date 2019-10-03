@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Link} from 'react-router-dom'
 import './RegisterForm.css'
 import firebaseApp from '../../firebase'
 
@@ -30,7 +31,9 @@ export default function RegisterForm() {
                   <div className="breadcrumb-text text-center">
                     <h1>Register</h1>
                     <ul className="breadcrumb-menu">
-                      <li><a href="index.html">home</a></li>                      
+                    <li> <Link to='/'>
+                            <a>Home</a>
+                          </Link></li>                     
                       <li><span>Register</span></li>
                     </ul>
                   </div>

@@ -1,5 +1,6 @@
 import {connect} from 'react-redux'
 import ProductItemView from './ProductItem'
+import {putToCart} from '../Header/Header.action'
 
 const mapStateToProps = (state) => {
     const {loginRed} = state
@@ -9,4 +10,8 @@ const mapStateToProps = (state) => {
     } 
 }
 
-export default connect(mapStateToProps, undefined)(ProductItemView)
+const mapDispatchToProps = {
+    putToCart
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductItemView)

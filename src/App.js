@@ -6,7 +6,8 @@ import Footer from './components/Footer/Footer'
 import ProductList from './components/ProductList/ProductList.container'
 import LoginForm from './components/Login/Login.container'
 import RegisterForm from './components/Register/RegisterForm'
-import ProductDetail from './components/ProductDetail/ProductDetail'
+import ProductDetail from './components/ProductDetail/ProductDetail.container'
+import CartForm from './components/Cart/Cart'
 import {BrowserRouter, Route, Link, Switch} from 'react-router-dom'
 import firebaseApp from './firebase';
 import PrivateRouter from './components/PrivateRouter'
@@ -19,7 +20,11 @@ function LoginPage() {
 
 function PageNotFound() {
   return (
-    <h1>404 nè</h1>
+    <>
+      <h1>404 nè</h1>
+      <h1>404 nè</h1>
+      <h1>404 nè</h1>
+    </>
   )
 }
 
@@ -53,7 +58,6 @@ function App() {
     })
   }
   
-
   return (
     // <React.Fragment>
       <BrowserRouter>
@@ -69,12 +73,18 @@ function App() {
           {/* <Route path="/detail/:id" render= {()=>(
               <ProductDetail productList={productList}/>
           )}/> */}
-          <PrivateRouter 
+            <Route path='/cart' render= {(props) => (<CartForm {...props} />)}  />
+               <Route path="/detail/:id"
+                render = {(propsOfRouter) => (
+                  <ProductDetail {...propsOfRouter}/>
+                )}
+               />
+          {/* <PrivateRouter 
               path="/detail/:id"
               render = {(propsOfRouter) => (
                 <ProductDetail productList={productList} {...propsOfRouter}/>
               )}/>
-          />
+          /> */}
           <Route path='/register' component={Register} />
           <Route component={PageNotFound}/>
         </Switch>

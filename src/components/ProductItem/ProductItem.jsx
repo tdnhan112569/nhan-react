@@ -4,10 +4,10 @@ import {Link, Redirect} from 'react-router-dom'
 
 function ProductItem(props) {
 
-    const {item, onAddToCard, _userInfo} = props
+    const {item, _userInfo, putToCart} = props
 
     const addToCard = () => {
-      onAddToCard(item)
+      putToCart(item)
     }
 
     const onPriceDisplay = (text) => {
@@ -29,7 +29,6 @@ function ProductItem(props) {
     }
 
     const param = `/detail/${item.product_id}`
-    //console.log(param)
     console.log(_userInfo)
 
     return (
@@ -41,7 +40,7 @@ function ProductItem(props) {
               <img className="secondary-img" src={item.url_icon_event} alt="" />
             </a>
             <div className="product-action text-center">
-              <a href="#" title="Shoppingb Cart" onClick={addToCard}>
+              <a href="#" title="Shopping Cart" onClick={addToCard}>
                 <i className="fas fa-shopping-cart" />
               </a>
               <Link to={param}>

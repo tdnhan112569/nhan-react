@@ -4,10 +4,12 @@ import Header from './Header'
 import {initUserInfo} from './Header.action'
 
 const mapStateToProps = (props) => {
-    const {loginRed} = props
+    const {loginRed, headerRed} = props
+    const {listItemCart} = headerRed
     console.log(props)
     return {
-        user:loginRed.user
+        user:loginRed.user,
+        listItemCart
     }
 }
 
