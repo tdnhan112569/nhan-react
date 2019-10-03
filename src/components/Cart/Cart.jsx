@@ -1,6 +1,26 @@
 import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 export default function CartForm(props) {
+    const {listItemCart} = props
+
+    const onPriceDisplay = (text) => {
+      if ((text + '').length <= 3) return text + ''
+      let i = 0
+      let price = (text + '').split('')
+      var priceToText = "";
+      let count = 0
+      for (i = price.length - 1; i >= 0; i--) {
+          if (count === 3) {
+              priceToText = price[i] + ',' + priceToText;
+              count = 0;
+          } else {
+              priceToText = price[i] + priceToText
+          }
+          count++
+      }
+      return priceToText
+    }
+  
     return (
         <main>
         {/* breadcrumb-area-start */}
@@ -41,17 +61,24 @@ export default function CartForm(props) {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td className="product-thumbnail"><a href="#"><img src="img/product/pro1.jpg" alt="" /></a></td>
-                          <td className="product-name"><a href="#">Bakix Furniture</a></td>
-                          <td className="product-price"><span className="amount">$130.00</span></td>
-                          <td className="product-quantity">
-                            <div className="cart-plus-minus"><input type="text" defaultValue={1} /><div className="dec qtybutton">-</div><div className="inc qtybutton">+</div></div>
-                          </td>
-                          <td className="product-subtotal"><span className="amount">$130.00</span></td>
-                          <td className="product-remove"><a href="#"><i className="fa fa-times" /></a></td>
-                        </tr>
-                        <tr>
+                        {
+                          listItemCart.map(element => {
+                            return (
+                              <tr>
+                                <td className="product-thumbnail"><a><img src={element.image} alt=""/></a></td>
+                                <td className="product-name"><a>{element.name}</a></td>
+                                <td className="product-price"><span className="amount">{onPriceDisplay (element.final_price)}</span></td>
+                                <td className="product-quantity">
+                                  <div className="cart-plus-minus"><input type="text" value={element.quantity} /><div className="dec qtybutton">-</div><div className="inc qtybutton">+</div></div>
+                                </td>
+                                <td className="product-subtotal"><span className="amount">{onPriceDisplay(element.final_price * element.quantity)}</span></td>
+                                <td className="product-remove"><a href="#"><i className="fa fa-times" /></a></td>
+                              </tr>
+                            )
+                          })
+                        }
+                       
+                        {/* <tr>
                           <td className="product-thumbnail"><a href="#"><img src="img/product/pro2.jpg" alt="" /></a></td>
                           <td className="product-name"><a href="#">Sujon Chair Set</a></td>
                           <td className="product-price"><span className="amount">$120.50</span></td>
@@ -60,7 +87,7 @@ export default function CartForm(props) {
                           </td>
                           <td className="product-subtotal"><span className="amount">$120.50</span></td>
                           <td className="product-remove"><a href="#"><i className="fa fa-times" /></a></td>
-                        </tr>
+                        </tr> */}
                       </tbody>
                     </table>
                   </div>

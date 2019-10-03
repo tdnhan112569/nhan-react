@@ -7,7 +7,7 @@ import ProductList from './components/ProductList/ProductList.container'
 import LoginForm from './components/Login/Login.container'
 import RegisterForm from './components/Register/RegisterForm'
 import ProductDetail from './components/ProductDetail/ProductDetail.container'
-import CartForm from './components/Cart/Cart'
+import CartForm from './components/Cart/Cart.container'
 import {BrowserRouter, Route, Link, Switch} from 'react-router-dom'
 import firebaseApp from './firebase';
 import PrivateRouter from './components/PrivateRouter'

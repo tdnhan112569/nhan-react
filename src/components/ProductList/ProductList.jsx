@@ -6,10 +6,6 @@ import ProductItem from '../ProductItem/ProductItem.container';
 function ProductList(props) {
 
   const {productList, onAddToCard, getProductList, getProductList2} = props
-
-  console.log('this is props')
-  console.log(props)
-  console.log('---------------')
   
   useEffect(()=>{
     getProductList()

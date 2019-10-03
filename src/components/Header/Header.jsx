@@ -24,6 +24,24 @@ function Header(props) {
     }
   },[user])
 
+  const onPriceDisplay = (text) => {
+    if ((text + '').length <= 3) return text + ''
+    let i = 0
+    let price = (text + '').split('')
+    var priceToText = "";
+    let count = 0
+    for (i = price.length - 1; i >= 0; i--) {
+        if (count === 3) {
+            priceToText = price[i] + ',' + priceToText;
+            count = 0;
+        } else {
+            priceToText = price[i] + priceToText
+        }
+        count++
+    }
+    return priceToText
+  }
+
   return (
     <header>
       <div id="header-sticky" className="header-area box-90 sticky-header">
@@ -140,7 +158,7 @@ function Header(props) {
                             <li>
                             <div className="cart-img">
                               <a href="#">
-                                <img src="./assets/pro1.jpg" alt="" />
+                                <img src={element.image} alt="" />
                               </a>
                             </div>
                             <div className="cart-content">
@@ -148,15 +166,16 @@ function Header(props) {
                                 <a href="#">{element.name}</a>
                               </h3>
                               <div className="cart-price">
-                                <span className="new">{element.price}</span>
-                                <span>
-                                  <del>{element.finalPrice}</del>
+                                <span className="new" style={{color:'black'}}>Qty: {element.quantity}</span>
+                                <span></span>
+                                <span style={{display:'inline-block', float:'right', color:'black'}}>
+                                  {onPriceDisplay (element.final_price)}  
                                 </span>
                               </div>
                             </div>
                             <div className="del-icon">
-                              <a href="#" onClick={() => {
-                                onRemoveItemFromCard(element)
+                              <a  onClick={() => {
+                                //onRemoveItemFromCard(element)
                               }}>
                                 <i className="far fa-trash-alt" />
                               </a>
@@ -167,9 +186,9 @@ function Header(props) {
                       <li>
                         <div className="total-price">
                           <span className="f-left">Total:</span>
-                          <span className="f-right">{arrayProductOrderCard.reduce((accumulator, currentValue) => {
-                              return accumulator + currentValue.finalPrice
-                          },0)}$</span>
+                          <span className="f-right">{onPriceDisplay( arrayProductOrderCard.reduce((accumulator, currentValue) => {
+                              return accumulator + currentValue.final_price * currentValue.quantity
+                          },0))}$</span>
                         </div>
                       </li>
                       <li>
