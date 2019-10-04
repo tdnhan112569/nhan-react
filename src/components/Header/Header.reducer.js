@@ -35,9 +35,11 @@ const headerReducer = (state = initState, action) => {
             }
         }
         case REMOVE_FORM_CART : {
-            let index = 0
             const {listItemCart} = state
-            let listItemAfterRemove = listItemCart.splice(index, 1)
+            let listItemAfterRemove = listItemCart.filter(element => {
+                return element.id !== payload
+            })
+            console.log(listItemAfterRemove,"Sau khi remove")
             return {
                 ...state,
                 listItemCart : listItemAfterRemove

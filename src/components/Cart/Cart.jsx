@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 export default function CartForm(props) {
-    const {listItemCart} = props
+    const {listItemCart, removeItemById} = props
 
     const onPriceDisplay = (text) => {
       if ((text + '').length <= 3) return text + ''
@@ -72,7 +72,7 @@ export default function CartForm(props) {
                                   <div className="cart-plus-minus"><input type="text" value={element.quantity} /><div className="dec qtybutton">-</div><div className="inc qtybutton">+</div></div>
                                 </td>
                                 <td className="product-subtotal"><span className="amount">{onPriceDisplay(element.final_price * element.quantity)}</span></td>
-                                <td className="product-remove"><a href="#"><i className="fa fa-times" /></a></td>
+                                <td className="product-remove"><a><i className="fa fa-times" onClick={()=>removeItemById(element.id)}/></a></td>
                               </tr>
                             )
                           })
@@ -109,8 +109,12 @@ export default function CartForm(props) {
                       <div className="cart-page-total">
                         <h2>Cart totals</h2>
                         <ul className="mb-20">
-                          <li>Subtotal <span>$250.00</span></li>
-                          <li>Total <span>$250.00</span></li>
+                          <li>Subtotal <span>{ onPriceDisplay(listItemCart.reduce((current, accetor) => {
+                                return current + accetor.final_price * accetor.quantity
+                          },0))}$</span></li>
+                           <li>Total <span>{ onPriceDisplay(listItemCart.reduce((current, accetor) => {
+                                return current + accetor.final_price * accetor.quantity
+                          },0))}$</span></li>
                         </ul>
                         <a className="btn theme-btn" href="#">Proceed to checkout</a>
                       </div>

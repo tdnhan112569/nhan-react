@@ -1,6 +1,14 @@
 export const INIT_USER_STATE = 'INIT_USER_STATE'
 export const PUT_TO_CART = 'PUT_TO_CART'
 export const REMOVE_FORM_CART = 'REMOVE_FROM_CART'
+
+export const removeItemById = (id) => {
+    return {
+        type : REMOVE_FORM_CART,
+        payload : id
+    }
+}
+
 export const initUserInfo = (user) => {
     return dispatchEvent => {
         dispatchEvent({
